@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Open Facebook App</title>
+  </head>
+  <body>
+    <button onclick="openFacebook()">Open Facebook Profile</button>
+
+    <a href="intent://profile#Intent;scheme=fb;package=com.facebook.katana;end">
+      Open Facebook (Android only)
+    </a>
+
+    <script>
+      function openFacebook() {
+        const start = Date.now();
+        window.location = "fb://profile"; // Try to open Facebook app
+
+        setTimeout(() => {
+          // If still on the page, assume app not installed
+          if (Date.now() - start < 2000) {
+            // Redirect to Facebook in browser
+            window.location = "https://facebook.com";
+          }
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>
