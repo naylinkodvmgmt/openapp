@@ -40,39 +40,39 @@
     
     <script>
       function openFacebook() {
-        const start = Date.now();
+        //const start = Date.now();
         window.location = "fb://profile"; // Try to open Facebook app
 
-        setTimeout(() => {
+        //setTimeout(() => {
           // If still on the page, assume app not installed
-          if (Date.now() - start < 2000) {
+          //if (Date.now() - start < 2000) {
             // Redirect to Facebook in browser
-            window.location = "https://facebook.com";
-          }
-        }, 1500);
+            //window.location = "https://facebook.com";
+          //}
+        //}, 1500);
       }
     </script>
     <script>
-    function openKBZPay() {
-      const userAgent = navigator.userAgent.toLowerCase();
-      const platform = navigator.platform.toLowerCase();
-
-      if (userAgent.includes("android")) {
-         // Android: open KBZPay via intent
-         //window.location = "intent://#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
-         window.location = "intent://open#Intent;scheme=KBZPay;package=com.kbzbank.kpaycustomer;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;end";
-      } else if (userAgent.includes("iphone") || userAgent.includes("ipad") || userAgent.includes("ipod")) {
-         // iOS: try to open KBZPay via URL scheme
-         window.location = "kbzpay://";
-      } else if (platform.includes("win") || platform.includes("mac")) {
-         // Windows or macOS: show message and redirect to website
-         alert("Please open this link on your mobile device.");
-         window.location = "https://www.kbzpay.com";
-      } else {
-         // Unknown/other platforms
-        window.location = "https://www.kbzpay.com";
+      function openKBZPay() {
+        const userAgent = navigator.userAgent.toLowerCase();
+        const platform = navigator.platform.toLowerCase();
+  
+        if (userAgent.includes("android")) {
+           // Android: open KBZPay via intent
+           //window.location = "intent://#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
+           window.location = "intent://open#Intent;scheme=KBZPay;package=com.kbzbank.kpaycustomer;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;end";
+        } else if (userAgent.includes("iphone") || userAgent.includes("ipad") || userAgent.includes("ipod")) {
+           // iOS: try to open KBZPay via URL scheme
+           window.location = "kbzpay://";
+        } else if (platform.includes("win") || platform.includes("mac")) {
+           // Windows or macOS: show message and redirect to website
+           alert("Please open this link on your mobile device.");
+           window.location = "https://www.kbzpay.com";
+        } else {
+           // Unknown/other platforms
+          window.location = "https://www.kbzpay.com";
+        }
       }
-    }
    </script>
     
   </body>
