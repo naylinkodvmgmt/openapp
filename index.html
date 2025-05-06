@@ -4,14 +4,17 @@
     <title>Open Facebook App</title>
   </head>
   <body>
-    <button onclick="openFacebook()">Open Facebook Profile</button>
-
-    <a href="intent://profile#Intent;scheme=fb;package=com.facebook.katana;end">
-      Open Facebook (Android only)
-    </a>
-
-    <button onclick="window.location.href='KBZPay://'">Open KBZPay</button>
-    
+    <div style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    ">
+      <button onclick="window.location.href='KBZPay://'">Open KBZPay</button>
+      <button onclick="openFacebook()">Open Facebook</button>
+      <button onclick="window.location.href='Youtube://'">Open YouTube</button>
+    </div>
     <script>
       function openFacebook() {
         const start = Date.now();
