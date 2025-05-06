@@ -1,20 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Open Facebook App</title>
+    <title>Open Mobile App</title>
   </head>
-  <body>
-    <div style="
+    <style>
+    body {
+      margin: 0;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-    ">
-      <button onclick="window.location.href='KBZPay://'">Open KBZPay</button>
-      <button onclick="openFacebook()">Open Facebook</button>
-      <button onclick="window.location.href='Youtube://'">Open YouTube</button>
-    </div>
+      background-color: #f0f2f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn {
+      background-color: #0070c0;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #005a9e;
+    }
+  </style>
+  <body>
+    
+    <button onclick="openKBZPay()">Open KBZPay</button>
+    <button onclick="openFacebook()">Open Facebook</button>
+    <button onclick="window.location.href='Youtube://'">Open YouTube</button>
+    
     <script>
       function openFacebook() {
         const start = Date.now();
@@ -29,5 +49,27 @@
         }, 1500);
       }
     </script>
+    <script>
+    function openKBZPay() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const platform = navigator.platform.toLowerCase();
+
+      if (userAgent.includes("android")) {
+         // Android: open KBZPay via intent
+         window.location = "intent://#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
+      } else if (userAgent.includes("iphone") || userAgent.includes("ipad") || userAgent.includes("ipod")) {
+         // iOS: try to open KBZPay via URL scheme
+         window.location = "kbzpay://";
+      } else if (platform.includes("win") || platform.includes("mac")) {
+         // Windows or macOS: show message and redirect to website
+         alert("Please open this link on your mobile device.");
+         window.location = "https://www.kbzpay.com";
+      } else {
+         // Unknown/other platforms
+        window.location = "https://www.kbzpay.com";
+      }
+    }
+   </script>
+    
   </body>
 </html>
