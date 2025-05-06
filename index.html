@@ -13,19 +13,22 @@
       align-items: center;
       background-color: #f0f2f5;
       font-family: Arial, sans-serif;
+      padding: 16px;
     }
 
     .btn {
       background-color: #0070c0;
       color: white;
       border: none;
-      padding: 15px 30px;
-      font-size: 24px;
-      border-radius: 8px;
+      padding: 24px;
+      font-size: 3.25rem;
+      border-radius: 14px;
       cursor: pointer;
       transition: background-color 0.3s;
-      width: 400px;
-      margin-bottom: 24px;
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 32px;
+      box-sizing: border-box;
     }
 
     .btn:hover {
@@ -35,25 +38,27 @@
   <body>
     <button class="btn" onclick="openKBZPay()">Open KBZPay</button>
     <button class="btn" onclick="openFacebook()">Open Facebook</button>
-    <button class="btn" onclick="window.location.href='YouTube://'">
-      Open YouTube
-    </button>
+    <button class="btn" onclick="openYoutube()">Open YouTube</button>
 
     <script>
-      function openFacebook() {
-        //const start = Date.now();
-        window.location = "fb://profile"; // Try to open Facebook app
+      const kbzpayUrl = {
+        android: "intent://kbzpay.com/openApp#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end",
+        ios: "kbzpay://kbzpay.com/openApp",
+        fallbackUrl: "https://www.kbzpay.com",
+      };
 
-        //setTimeout(() => {
-        // If still on the page, assume app not installed
-        //if (Date.now() - start < 2000) {
-        // Redirect to Facebook in browser
-        //window.location = "https://facebook.com";
-        //}
-        //}, 1500);
-      }
-    </script>
-    <script>
+      const facebookUrl = {
+        android: "intent://profile#Intent;scheme=fb;package=com.facebook.katana;end",
+        ios: "fb://profile",
+        fallbackUrl: "https://www.facebook.com",
+      };
+
+      const youtubeUrl = {
+        android: "intent://#Intent;scheme=https;package=com.google.android.youtube;end",
+        ios: "youtube://",
+        fallbackUrl: "https://www.youtube.com",
+      };
+
       function isAndroid() {
         return /Android/i.test(navigator.userAgent);
       }
@@ -62,20 +67,43 @@
         return /iPhone|iPad|iPod/i.test(navigator.userAgent);
       }
 
-      function openKBZPay() {
-        //const schemeUrl = "kbzpay://kbzpay.com/openApp";
-        const fallbackUrl = "https://www.kbzpay.com";
+      function openApp(url) {
+        let appOpened = false;
 
         if (isAndroid()) {
-          window.location ="intent://kbzpay.com/openApp#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
+          window.location = url.android;
         } else if (isIOS()) {
-          window.location = "kbzpay://kbzpay.com/openApp";
+          window.location = url.ios;
         } else {
-          // For non-Android/iOS users, show the website
-          window.location.href = fallbackUrl;
-          alert("Redirecting to the KBZPay website.");
+          window.location.href = url.fallbackUrl;
+          return; // Stop here
         }
+
+        // Check after 1.5 seconds if the app was not opened
+        setTimeout(function () {
+          if (!appOpened) {
+            window.location.href = url.fallbackUrl;
+          }
+        }, 1500);
+
+        // If user switches away (to app), mark as opened
+        window.addEventListener("blur", function () {
+          appOpened = true;
+        });
       }
+
+      const openKBZPay = () => {
+        openApp(kbzpayUrl);
+      };
+
+      const openFacebook = () => {
+        openApp(facebookUrl);
+      };
+
+      const openYoutube = () => {
+        openApp(youtubeUrl);
+      };
+
     </script>
   </body>
 </html>
