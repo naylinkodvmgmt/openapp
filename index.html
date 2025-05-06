@@ -59,7 +59,8 @@
 
       if (userAgent.includes("android")) {
          // Android: open KBZPay via intent
-         window.location = "intent://#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
+         //window.location = "intent://#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end";
+         window.location = "intent://open#Intent;scheme=KBZPay;package=com.kbzbank.kpaycustomer;action=android.intent.action.VIEW;category=android.intent.category.DEFAULT;end";
       } else if (userAgent.includes("iphone") || userAgent.includes("ipad") || userAgent.includes("ipod")) {
          // iOS: try to open KBZPay via URL scheme
          window.location = "kbzpay://";
