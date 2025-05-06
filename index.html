@@ -8,6 +8,7 @@
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       background-color: #f0f2f5;
@@ -23,6 +24,8 @@
       border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
+      width: 200px;
+      margin-bottom: 16px;
     }
 
     .btn:hover {
@@ -31,9 +34,9 @@
   </style>
   <body>
     
-    <button onclick="openKBZPay()">Open KBZPay</button>
-    <button onclick="openFacebook()">Open Facebook</button>
-    <button onclick="window.location.href='Youtube://'">Open YouTube</button>
+    <button class="btn" onclick="openKBZPay()">Open KBZPay</button>
+    <button class="btn" onclick="openFacebook()">Open Facebook</button>
+    <button class="btn" onclick="window.location.href='Youtube://'">Open YouTube</button>
     
     <script>
       function openFacebook() {
