@@ -66,16 +66,34 @@
         const schemeUrl = "kbzpay://kbzpay.com/openApp";
         const fallbackUrl = "https://www.kbzpay.com";
 
+        // Track if app is opened
+        let appOpened = false;
+
         if (isAndroid() || isIOS()) {
+          // Attempt to open the app
           window.location.href = schemeUrl;
 
-          // Fallback after delay
-          setTimeout(() => {
-            window.location.href = fallbackUrl;
-          }, 2000);
+          // Use a timeout to detect if the app was opened
+          setTimeout(function () {
+            if (!appOpened) {
+              alert(
+                "The KBZPay app did not open. Redirecting to the website..."
+              );
+              window.location.href = fallbackUrl;
+            }
+          }, 2000); // Check after 2 seconds
+
+          // Mark app as opened when user switches to the app
+          appOpened = true;
+
+          // Optionally, add a check for user interaction (not reliable for all cases)
+          window.addEventListener("blur", function () {
+            appOpened = true; // User has left the web page, possibly to the app
+          });
         } else {
-          // Web fallback
+          // For non-Android/iOS users, show the website
           window.location.href = fallbackUrl;
+          alert("Redirecting to the KBZPay website.");
         }
       }
     </script>
