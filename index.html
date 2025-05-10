@@ -13,7 +13,6 @@
       align-items: center;
       background-color: #f0f2f5;
       font-family: Arial, sans-serif;
-      padding: 16px;
     }
 
     .btn {
@@ -75,14 +74,14 @@
         } else if (isIOS()) {
           window.location = url.ios;
         } else {
-          window.location.href = url.fallbackUrl;
+          window.open(url.fallbackUrl, "_blank");
           return; // Stop here
         }
 
         // Check after 1.5 seconds if the app was not opened
         setTimeout(function () {
           if (!appOpened) {
-            window.location.href = url.fallbackUrl;
+            window.open(url.fallbackUrl, "_blank");
           }
         }, 1500);
 
