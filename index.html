@@ -35,11 +35,18 @@
     }
   </style>
   <body>
+    <button class="btn" onclick="openUABPay()">Open UABPay</button>
     <button class="btn" onclick="openKBZPay()">Open KBZPay</button>
     <button class="btn" onclick="openFacebook()">Open Facebook</button>
     <button class="btn" onclick="openYoutube()">Open YouTube</button>
 
     <script>
+      const uabpayUrl = {
+        android: "intent://uabpay/openApp#Intent;scheme=uabbankpay;package=com.uab.uabbankpay;end",
+        ios: "uabpay://",
+        fallbackUrl: "https://www.uab.com.mm/digital/uabpay/",
+      };
+
       const kbzpayUrl = {
         android: "intent://kbzpay.com/openApp#Intent;scheme=kbzpay;package=com.kbzbank.kpaycustomer;end",
         ios: "kbzpay://kbzpay.com/openApp",
@@ -101,6 +108,10 @@
 
       const openYoutube = () => {
         openApp(youtubeUrl);
+      };
+
+      const openUABPay = () => {
+        openApp(uabpayUrl);
       };
 
     </script>
