@@ -5,6 +5,10 @@
 3. Pull APK
 4. Decode APK
 
+### Netlify URL
+
+[https://open-mbapp.netlify.app/](https://open-mbapp.netlify.app/)
+
 ### 1. Install APK in Android Emulator
 
 1. Need to install Android Studio
